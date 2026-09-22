@@ -75,7 +75,7 @@
             height: 0;
         }
 
-        /* ESTILOS DE IMÁGENES SIN MÁRGENES */
+        /* ESTILOS DE IMÁGENES SIN MÁRGENES NI LÍNEAS DE SEPARACIÓN */
         .image-section {
             width: 100%;
             margin: 0;
@@ -83,6 +83,9 @@
             display: block;
             position: relative;
             line-height: 0;
+            font-size: 0;
+            border: none;
+            outline: none;
         }
 
         .image-section img {
@@ -91,11 +94,18 @@
             display: block;
             margin: 0;
             padding: 0;
+            border: none;
+            outline: none;
+            vertical-align: bottom;
         }
 
-        /* PORTADA COMPLETA SIN MARGENES */
+        /* PORTADA COMPLETA SIN MARGENES NI CORTE CON LA FECHA */
         .portada-section {
             width: 100%;
+            margin: 0;
+            padding: 0;
+            line-height: 0;
+            font-size: 0;
         }
 
         .portada-section img {
@@ -105,6 +115,7 @@
             opacity: 0.9;
             transform: translateY(0);
             transition: transform 1.8s ease-out, opacity 1.8s ease-out;
+            vertical-align: bottom;
         }
 
         .open-portada .portada-section img {
@@ -480,17 +491,30 @@
             display: block;
         }
 
-        /* ÁREA INTERACTIVA SOBRE EL SELLO DE LACRE CON PULSO */
-        .wax-seal-button {
+        /* ÁREA INTERACTIVA COMPLETA (SELLO + TEXTO ABAJO) */
+        .envelope-interactive-area {
             position: absolute;
-            top: 42.5%;
+            top: 52%;
             left: 50%;
             transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            z-index: 8;
+            background: none;
+            border: none;
+            outline: none;
+            width: 100%;
+            max-width: 320px;
+        }
+
+        /* SELLO DE LACRE CON PULSO */
+        .wax-seal-button {
             width: 120px;
             height: 140px;
             border-radius: 50%;
             cursor: pointer;
-            z-index: 8;
             outline: none;
             background: transparent;
             border: none;
@@ -498,20 +522,16 @@
         }
 
         @keyframes pulseSeal {
-            0% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -50%) scale(1.06); }
-            100% { transform: translate(-50%, -50%) scale(1); }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+            100% { transform: scale(1); }
         }
 
-        /* ETIQUETA POSICIONADA ABAJO DEL SELLO */
+        /* ETIQUETA CRISTALINA CRISTAL/TRANSPARENTE */
         .view-text-container {
-            position: absolute;
-            top: 62%;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 7;
+            margin-top: 25px;
             text-align: center;
-            width: 90%;
+            width: 100%;
             pointer-events: none;
         }
 
@@ -519,17 +539,23 @@
             display: inline-block;
             font-family: 'Montserrat', sans-serif;
             font-size: 10px;
-            color: #FDFBF7;
+            color: #FFFFFF;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 2px;
-            background: rgba(45, 12, 12, 0.45);
-            padding: 8px 18px;
+            background: rgba(96, 22, 21, 0.35);
+            padding: 9px 20px;
             border-radius: 30px;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .envelope-interactive-area:active .view-text {
+            transform: scale(0.96);
+            background: rgba(96, 22, 21, 0.5);
         }
 
         .open.envelope-container {
@@ -693,20 +719,20 @@
 
     </div>
 
-    <!-- SOBRE CON LA IMAGEN DE SOBRE.JPG Y BOTÓN EN EL SELLO -->
+    <!-- SOBRE CON LA IMAGEN DE SOBRE.JPG Y ÁREA INTERACTIVA COMPLETA -->
     <div class="envelope-container" id="envelope">
         <div class="envelope-image-wrapper">
             <img src="sobre.jpg" alt="Sobre de Invitación">
             
-            <!-- ÁREA INTERACTIVA SOBRE EL SELLO DE LACRE -->
-            <button class="wax-seal-button" onclick="openEnvelope()" aria-label="Abrir invitación"></button>
-
-            <!-- ETIQUETA CON EL TEXTO SOLICITADO -->
-            <div class="view-text-container">
-                <div class="view-text">
-                    Da click en el sello para ver invitación
+            <!-- CONTENEDOR INTERACTIVO (SELLO + TEXTO ABAJO) -->
+            <button class="envelope-interactive-area" onclick="openEnvelope()" aria-label="Abrir invitación">
+                <div class="wax-seal-button"></div>
+                <div class="view-text-container">
+                    <div class="view-text">
+                        Da click en el sello para ver invitación
+                    </div>
                 </div>
-            </div>
+            </button>
         </div>
     </div>
 
@@ -789,7 +815,7 @@
 
         const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
         const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutos = Math.floor((diferencia % (1000 * 60)) / (1000 * 60));
+        const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
         const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
 
         document.getElementById("dias").innerHTML = String(dias).padStart(2, "0");
