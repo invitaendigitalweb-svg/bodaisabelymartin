@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Nuestra Invitación</title>
+
 <!-- METATAGS DE CONFIGURACIÓN PARA MINIATURA DE WHATSAPP -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Isabel & Martin - Nuestra Boda">
@@ -61,7 +62,7 @@
             -ms-overflow-style: none;
             scroll-behavior: smooth;
             opacity: 0;
-            transition: opacity 0.8s ease;
+            transition: opacity 1.2s ease 0.3s;
         }
 
         .invitation-wrapper.open-portada {
@@ -161,7 +162,7 @@
             margin-top: 2px;
         }
 
-        /* SECCIÓN DE CEREMONIA CON BOTONES SOBREPUESTOS (#601615) */
+        /* SECCIÓN DE CEREMONIA CON BOTONES ALINEADOS DEBAJO DE LAS DIRECCIONES */
         .ceremony-container {
             position: relative;
             width: 100%;
@@ -169,24 +170,24 @@
 
         .btn-overlay {
             position: absolute;
-            left: 50%;
+            left: 28%;
             transform: translateX(-50%);
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 4px;
             background: #601615;
             color: #ffffff;
             font-family: 'Montserrat', sans-serif;
-            font-size: 10px;
+            font-size: 8px;
             font-weight: 600;
-            letter-spacing: 2px;
+            letter-spacing: 0.8px;
             text-transform: uppercase;
             text-decoration: none;
-            padding: 10px 22px;
-            border-radius: 25px;
+            padding: 4px 10px;
+            border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 4px 12px rgba(96, 22, 21, 0.35);
+            box-shadow: 0 2px 6px rgba(96, 22, 21, 0.25);
             transition: all 0.3s ease;
             z-index: 5;
             white-space: nowrap;
@@ -198,17 +199,17 @@
         }
 
         .btn-overlay svg {
-            width: 14px;
-            height: 14px;
+            width: 10px;
+            height: 10px;
             fill: #ffffff;
         }
 
         .btn-ceremonia {
-            top: 41%;
+            top: 42%;
         }
 
         .btn-recepcion {
-            bottom: 4.5%;
+            top: 76%;
         }
 
         /* BOTÓN INDEPENDIENTE PARA VESTIMENTA */
@@ -268,7 +269,7 @@
             width: 100%;
         }
 
-        /* ESTILOS DEL CARRUSEL DE FOTOS CON ALTURA Y PROPORCIÓN FIJA */
+        /* ESTILOS DEL CARRUSEL DE FOTOS */
         .slider-container {
             position: relative;
             width: 100%;
@@ -447,7 +448,7 @@
             display: block;
         }
 
-        /* SOBRE */
+        /* SOBRE ELEGANTE CON SELLO INTERACTIVO */
         .envelope-container {
             position: absolute;
             top: 0;
@@ -455,92 +456,87 @@
             width: 100%;
             height: 100%;
             height: 100dvh;
-            cursor: pointer;
-            perspective: 1200px;
             z-index: 10;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #F9F8F5;
+            background-color: #4A0E0E;
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s ease;
         }
 
-        .flap {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .envelope-image-wrapper {
+            position: relative;
             width: 100%;
             height: 100%;
-            background-image: url('sobre.jpg');
-            background-size: cover;
-            background-position: center;
-            backface-visibility: hidden;
-            transition: transform 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .envelope-flap-top {
-            clip-path: polygon(0 0, 100% 0, 50% 50%);
-            transform-origin: top;
-            z-index: 5;
+        .envelope-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
-        .envelope-flap-bottom {
-            clip-path: polygon(0 100%, 100% 100%, 50% 50%);
-            transform-origin: bottom;
-            z-index: 3;
-        }
-
-        .envelope-flap-left {
-            clip-path: polygon(0 0, 0 100%, 50% 50%);
-            transform-origin: left;
-            z-index: 2;
-        }
-
-        .envelope-flap-right {
-            clip-path: polygon(100% 0, 100% 100%, 50% 50%);
-            transform-origin: right;
-            z-index: 2;
-        }
-
-        .center-group {
+        /* ÁREA INTERACTIVA SOBRE EL SELLO DE LACRE CON PULSO */
+        .wax-seal-button {
             position: absolute;
-            top: 61.5%;
-            left: 66%;
+            top: 42.5%;
+            left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 6;
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            width: 120px;
+            height: 140px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 8;
+            outline: none;
+            background: transparent;
+            border: none;
+            animation: pulseSeal 2.5s infinite ease-in-out;
+        }
+
+        @keyframes pulseSeal {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.06); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        /* ETIQUETA POSICIONADA ABAJO DEL SELLO */
+        .view-text-container {
+            position: absolute;
+            top: 62%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 7;
+            text-align: center;
+            width: 90%;
+            pointer-events: none;
         }
 
         .view-text {
-            font-size: 11px;
-            color: #3D2B1F;
-            font-weight: 700;
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            color: #FDFBF7;
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 2.5px;
-            background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%);
+            letter-spacing: 2px;
+            background: rgba(45, 12, 12, 0.45);
             padding: 8px 18px;
-            border-radius: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(4px);
-            white-space: nowrap;
-        }
-
-        .open .envelope-flap-top { transform: rotateX(180deg); }
-        .open .envelope-flap-bottom { transform: rotateX(-180deg); }
-        .open .envelope-flap-left { transform: rotateY(-180deg); }
-        .open .envelope-flap-right { transform: rotateY(180deg); }
-
-        .open .center-group {
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(0.85);
-            visibility: hidden;
+            border-radius: 30px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
         .open.envelope-container {
             opacity: 0;
+            transform: scale(1.08);
             visibility: hidden;
             pointer-events: none;
-            transition: opacity 1.2s ease 1s, visibility 1.2s ease 1s;
         }
 
         @media (max-width: 480px) {
@@ -635,7 +631,12 @@
             </div>
         </div>
 
-        <!-- 7. VESTIMENTA -->
+        <!-- 7. ITINERARIO -->
+        <div class="image-section reveal-section">
+            <img src="itinerario.jpg" alt="Itinerario">
+        </div>
+
+        <!-- 8. VESTIMENTA -->
         <div class="image-section reveal-section">
             <img src="vestimenta.jpg" alt="Vestimenta">
         </div>
@@ -649,20 +650,20 @@
 
         <!-- IMAGEN DESPLEGABLE ABAJO DEL BOTÓN -->
         <div class="inspiracion-desplegable" id="desplegableInspiracion">
-            <img src="https://i.imgur.com/HrH9uQP.jpeg" alt="Inspiración de Vestimenta">
+            <img src="https://i.imgur.com/FBOEOvX.jpeg" alt="Inspiración de Vestimenta">
         </div>
 
-        <!-- 8. REGALO -->
+        <!-- 9. REGALO -->
         <div class="image-section reveal-section gift-container">
             <img src="regalo.jpg" alt="Regalo">
         </div>
 
-        <!-- 9. ASISTENCIA -->
+        <!-- 10. ASISTENCIA -->
         <div class="image-section reveal-section">
             <img src="asistencia.jpg" alt="Asistencia">
         </div>
 
-        <!-- 10. FORMULARIO RSVP ADAPTADO -->
+        <!-- 11. FORMULARIO RSVP ADAPTADO -->
         <div class="rsvp-container-wrapper reveal-section">
             <div class="tarjeta-asistencia">
                 <div class="grupo">
@@ -692,16 +693,19 @@
 
     </div>
 
-    <!-- SOBRE -->
-    <div class="envelope-container" id="envelope" onclick="openEnvelope()">
-        <div class="flap envelope-flap-top"></div>
-        <div class="flap envelope-flap-bottom"></div>
-        <div class="flap envelope-flap-left"></div>
-        <div class="flap envelope-flap-right"></div>
+    <!-- SOBRE CON LA IMAGEN DE SOBRE.JPG Y BOTÓN EN EL SELLO -->
+    <div class="envelope-container" id="envelope">
+        <div class="envelope-image-wrapper">
+            <img src="sobre.jpg" alt="Sobre de Invitación">
+            
+            <!-- ÁREA INTERACTIVA SOBRE EL SELLO DE LACRE -->
+            <button class="wax-seal-button" onclick="openEnvelope()" aria-label="Abrir invitación"></button>
 
-        <div class="center-group">
-            <div class="view-text">
-                Ver invitación
+            <!-- ETIQUETA CON EL TEXTO SOLICITADO -->
+            <div class="view-text-container">
+                <div class="view-text">
+                    Da click en el sello para ver invitación
+                </div>
             </div>
         </div>
     </div>
@@ -835,13 +839,11 @@
         const mensaje = document.getElementById('mensaje');
         const boton = document.getElementById('boton');
 
-        // 1. Valida si falta el nombre o seleccionar la opción
         if (!nombreInput || !asistencia) {
             mostrarMensaje('Por favor escribe tu nombre y selecciona si asistirás.');
             return;
         }
 
-        // 2. Valida que tenga al menos 3 palabras (Nombre y dos apellidos)
         const palabras = nombreInput.split(/\s+/).filter(word => word.length > 0);
         if (palabras.length < 3) {
             mostrarMensaje('Por favor ingresa tu nombre completo (Nombre y dos apellidos).');
